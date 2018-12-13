@@ -1,4 +1,4 @@
-﻿#CRUD - Node js, Mongo, Express, Gulp e Nodemon
+#CRUD - Node js, Mongo, Express, Gulp e Nodemon
 
 Linguagem: Javascript (Node js)
 

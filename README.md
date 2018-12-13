@@ -1,17 +1,17 @@
-#CRUD - Node js, Mongo, Express, Gulp e Nodemon
+CRUD - Node js, Mongo, Express, Gulp e Nodemon
 
-Linguagem: Javascript (Node js)
+º Linguagem: Javascript (Node js)
 
-Banco de dados: Mongodb
+º Banco de dados: Mongodb
 
-Ferramentas de automação de processo: Nodemon e Gulp
+º Ferramentas de automação de processo: Nodemon e Gulp
 
-Servidor: Express
+º Servidor: Express
 
-Teste: Postman
+º Teste: Postman
 
-#Gulp
+Gulp
 Roda com comando: gulp
 
-#Nodemon
+Nodemon
 Roda com comando: npm run dev

@@ -11,12 +11,13 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Produto = require('./app/models/produto');
 const app = express();
-
 mongoose.Promise = global.Promise;
 
 //URL: MLab
-mongoose.connect('mongodb://anastassja:anastassja123@ds027748.mlab.com:27748/node-mongo-crud-api',{
-    useMongoClient:true
+const uri = "mongodb://anastassja:anastassja123@ds027748.mlab.com:27748/node-mongo-crud-api";
+
+mongoose.connect(uri,{
+    useMongoClient:true,
 });
 
 //Maneira Local: Mongodb
@@ -47,6 +48,7 @@ router.get('/', function(req, res){
     res.json({message: 'Ok'})
 });
 
+
 //API
 //-------------------------------------------------------------------------------------------------------------
 router.route('/produtos')
@@ -67,6 +69,22 @@ router.route('/produtos')
         res.json({ message: 'Produto cadastrado com sucesso' });
     });
 })
+
+// app.post('/api', (req, res) => {
+//     const produto = new Produto();
+
+//     produto.nome = req.body.nome;
+//     produto.preco = req.body.preco;
+//     produto.descricao = req.body.descricao;
+
+//     produto.save()
+//             .then(item => {
+//             res.send("Produto salvo com sucesso");
+//         })
+//             .catch(err => {
+//             res.status(400).send("unable to save to database");
+//         });
+// })
 
 //MÉTODO GET - Seleciona todos os produtos (Acessar em http://localhos:8000/api/produtos)
 
@@ -132,6 +150,9 @@ router.route('/produtos/:produto_id')
 
 //Definindo um padrão das rotas prefixadas: '/api'
 app.use('/api', router);
+app.use("/", (req, res) => {
+    res.sendFile(__dirname + "/index.html");
+});
 
 //Iniciando o servidor/aplicação
 app.listen(port);

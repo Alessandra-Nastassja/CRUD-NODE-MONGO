@@ -9,8 +9,10 @@
   "dependencies": {
     "babel-preset-env": "^1.7.0",
     "body-parser": "~1.0.1",
+    "ejs": "^2.6.1",
     "express": "~4.15.4",
     "gulp-cli": "^2.0.1",
+    "mongodb": "^3.1.10",
     "mongoose": "^4.11.12",
     "request": "~2.02.0"
   },

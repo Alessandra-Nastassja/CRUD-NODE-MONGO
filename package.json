@@ -1,0 +1,28 @@
+{
+  "name": "acougano",
+  "version": "1.0.0",
+  "description": "Comércio eletrônico",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon"
+  },
+  "author": "Alessandra Nastassja",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.15.5",
+    "mongoose": "^4.11.14",
+    "request": "^2.82.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-present-env": "1.6.1",
+    "babel-preset-env": "^1.7.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.1",
+    "gulp-cli": "^2.0.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-uglify": "^3.0.0",
+    "nodemon": "^1.12.1"
+  }
+}

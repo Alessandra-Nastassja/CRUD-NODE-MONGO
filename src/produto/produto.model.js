@@ -64,13 +64,13 @@ module.exports = function (app) {
         });
     })
     //MÉTODO DELETE - Deletar por ID
-    // app.delete('/produto/:produto_id', function (req, res) {
-    //     Produto.remove({
-    //         _id: req.params.produto_id
-    //     }, function (error) {
-    //         if (error)
-    //             res.send('Error ao tentar deletar um produto por id' + error);
-    //         res.json({ message: 'Produto deletado com sucesso' });
-    //     });
-    // });
+    app.delete('/produto/:produto_id', function (req, res) {
+        Produto.remove({
+            _id: req.params.produto_id
+        }, function (error) {
+            if (error)
+                res.send('Error ao tentar deletar um produto por id' + error);
+            res.json({ message: 'Produto deletado com sucesso' });
+        });
+    });
 }

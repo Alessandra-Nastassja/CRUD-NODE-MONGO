@@ -56,7 +56,7 @@
             function carregarTodos() {
                 $.get("http://localhost:8000/produto/todosProdutos", function (data, status) {
                     for (i = 0; i < data.length; i++) {
-                        $("#tabela").append("<tr><td>" + data[i]._id + "</td><td>" + data[i].nome + "</td><td>" + data[i].preco + "</td><td>" + data[i].descricao + "</td><td><button type='button' class='btn btn-primary' onclick='editarRegistro(&quot;" + data[i]._id + "&quot;)'>Editar</button></td><td><button class='btn btn-danger deletar'>Deletar</button></td></tr>");
+                        $("#tabela").append("<tr><td>" + data[i]._id + "</td><td>" + data[i].nome + "</td><td>" + data[i].preco + "</td><td>" + data[i].descricao + "</td><td><button type='button' class='btn btn-primary' onclick='editarRegistro(&quot;" + data[i]._id + "&quot;)'>Editar</button></td><td><button type='button' class='btn btn-danger' onclick='deletarRegistro(&quot;" + data[i]._id + "&quot;)'>Deletar</button></td></tr>");
                     }
                 });
             }
@@ -78,6 +78,17 @@
                 $("#descricao").val(data.descricao);
                 $("#cadastrar").val('Salvar');
                 $("#cancelar").show();
+            });
+        }
+        function deletarRegistro(_id) {
+            window.location.reload();
+            $.ajax({
+                url: "http://localhost:8000/produto/" + _id,
+                type: "DELETE",
+                dataType: "application/json",
+                success: function (xhr) {
+                    alert("Sucesso!");
+                }
             });
         }
     </script>

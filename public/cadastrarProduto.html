@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Cadastrar produto</title>
+    <script>
+        $(document).ready(function () {
+            limparForm();
+            $("#tabela").empty();
+            carregarTodos();
+            $("#cadastrar").click(function () {
+                var valorBotao = $("#cadastrar").val();
+                var data = {
+                    nome: $("#nome").val(),
+                    preco: $("#preco").val(),
+                    descricao: $("#descricao").val()
+                };
+                if (valorBotao == "Cadastrar") {
+                    $.post("http://localhost:8000/produto/new",
+                        data,
+                        function (data, status) {
+                            alert("O resultado é...: " + data + "\nStatus: " + status);
+                            $("#tabela").empty();
+                            carregarTodos();
+                        });
+                } else {
+                    var _id = $("#idProduto").val();
+                    $.ajax({
+                        url: "http://localhost:8000/produto/" + _id,
+                        type: "PUT",
+                        data: data,
+                        dataType: "application/json",
+                        success: function (data, xhr) {
+                            alert("Sucesso!", data.msg, "success");
+                            $("#tabela").empty();
+                            carregarTodos();
+                            console.log(data)
+                        }, error: function (data, xhr) {
+                            console.log("Erro!", data.msg, "error");
+                            $("#tabela").empty();
+                            carregarTodos();
+                        }
+                    });
+                }
+                limparForm();
+            });
+
+            function carregarTodos() {
+                $.get("http://localhost:8000/produto/todosProdutos", function (data, status) {
+                    for (i = 0; i < data.length; i++) {
+                        $("#tabela").append("<tr><td>" + data[i]._id + "</td><td>" + data[i].nome + "</td><td>" + data[i].preco + "</td><td>" + data[i].descricao + "</td><td><button type='button' class='btn btn-primary' onclick='editarRegistro(&quot;" + data[i]._id + "&quot;)'>Editar</button></td><td><button class='btn btn-danger deletar'>Deletar</button></td></tr>");
+                    }
+                });
+            }
+        });
+        function limparForm() {
+            $("#idProduto").val("");
+            $("#nome").val("");
+            $("#preco").val("");
+            $("#descricao").val("");
+            $("#cadastrar").val('Cadastrar');
+
+            $("#cancelar").hide();
+        }
+        function editarRegistro(_id, data) {
+            $.get("http://localhost:8000/produto/" + _id, function (data, status) {
+                $("#idProduto").val(_id);
+                $("#nome").val(data.nome);
+                $("#preco").val(data.preco);
+                $("#descricao").val(data.descricao);
+                $("#cadastrar").val('Salvar');
+                $("#cancelar").show();
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <nav class="nav">
+        <a class="nav-link active" href="/">Home</a>
+        <a class="nav-link" href="/produto/new">Cadastrar produto</a>
+    </nav>
+    <div class="container" style="margin-top: 50px;">
+        <h1>Cadastrar produto</h1> <br>
+        <form>
+            <fieldset disabled>
+                <div class="form-group">
+                    <label for="disabledTextInput">ID do produto</label>
+                    <input type="text" id="idProduto" class="form-control" placeholder="ID do produto">
+                </div>
+            </fieldset>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Nome do produto</label>
+                <input type="text" class="form-control" id="nome" placeholder="Digite o nome produto" name="nome">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Preço</label>
+                <input type="text" class="form-control" id="preco" placeholder="Digite o preço" name="preco">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Descrição</label>
+                <input type="text" class="form-control" id="descricao" placeholder="Digite a descrição" name="descricao">
+            </div>
+            <input type="button" class="btn btn-success" id="cadastrar" value="Cadastrar">
+            <button type="button" class="btn btn-info" id="cancelar" onclick="limparForm()">Cancelar</button>
+        </form>
+        <br>
+        <p id="demo"></p>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome do produto</th>
+                    <th scope="col">Preço</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Deletar</th>
+                </tr>
+            </thead>
+            <tbody id="tabela">
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>

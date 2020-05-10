@@ -1,5 +1,5 @@
 # CRUD-NODE-MONGO
-Projeto reaizado com o objetivo de estudar as tecnologias citadas a baixo.
+Projeto reaizado com o objetivo de estudar as tecnologias citadas abaixo.
 
 ### *Tecnologias usadas:* 🚀
 
